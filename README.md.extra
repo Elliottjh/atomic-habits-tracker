@@ -1,0 +1,34 @@
+# Important Note
+
+The complete implementation files for this project were generated as part of an AI conversation. Due to the limitations of the current interface, we were unable to add all the source files directly to this repository.
+
+## Implementation Details
+
+The complete code includes:
+
+1. Backend:
+   - Express.js server with authentication, habit tracking, and analytics
+   - Prisma ORM for PostgreSQL database integration
+   - Email verification system
+   - JWT-based authentication
+
+2. Frontend:
+   - React with Tailwind CSS
+   - Dark/Light mode theme support
+   - Particle animation background
+   - Complete user interface for habit tracking
+
+3. Deployment:
+   - Docker and docker-compose setup
+   - Vercel/Render deployment instructions
+
+## Getting the Files
+
+To get the complete set of files, please reach out to the repository owner or refer to the conversation history where the implementation was generated.
+
+## Next Steps
+
+1. Create the necessary files based on the implementation details
+2. Set up your PostgreSQL database
+3. Configure environment variables
+4. Run the application using the instructions in the main README.md 

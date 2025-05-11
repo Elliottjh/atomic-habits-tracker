@@ -1,0 +1,13 @@
+// Prisma Schema for Habit Tracker
+
+This Prisma schema defines the PostgreSQL database structure for the Habit Tracker application.
+
+Key models include:
+- User: User accounts with email verification
+- UserSettings: User preferences for dark mode and particle animation
+- Habit: Habit tracking with categories and priority flags
+- HabitTracking: Daily tracking records for each habit
+
+The database is configured to use PostgreSQL.
+
+For the full schema implementation, please refer to the conversation history. 
