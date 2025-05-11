@@ -1,0 +1,71 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int               @id @default(autoincrement())
+  email             String            @unique
+  password          String
+  name              String?
+  isVerified        Boolean           @default(false)
+  verificationToken String?
+  habits            Habit[]
+  settings          UserSettings?
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model UserSettings {
+  id               Int      @id @default(autoincrement())
+  userId           Int      @unique @map("user_id")
+  darkMode         Boolean  @default(false) @map("dark_mode")
+  particleAnimation Boolean  @default(true) @map("particle_animation")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
+model Habit {
+  id          Int               @id @default(autoincrement())
+  userId      Int               @map("user_id")
+  name        String
+  description String?
+  category    String
+  startDate   DateTime          @map("start_date")
+  color       String?
+  isPriority  Boolean           @default(false) @map("is_priority")
+  isArchived  Boolean           @default(false) @map("is_archived")
+  isDeleted   Boolean           @default(false) @map("is_deleted")
+  createdAt   DateTime          @default(now()) @map("created_at")
+  updatedAt   DateTime          @updatedAt @map("updated_at")
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trackings   HabitTracking[]
+
+  @@map("habits")
+}
+
+model HabitTracking {
+  id        Int      @id @default(autoincrement())
+  habitId   Int      @map("habit_id")
+  date      DateTime
+  completed Boolean  @default(false)
+  comment   String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+
+  @@unique([habitId, date])
+  @@map("habit_trackings")
+}
